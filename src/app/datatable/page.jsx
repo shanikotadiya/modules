@@ -5,8 +5,8 @@ import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
 import axios from "axios";
 import Snackbar from "@mui/joy/Snackbar";
-import Button from "@mui/joy/Button";
 import DataTable from "react-data-table-component";
+import Toaster from "../sub-component/toaster";
 
 export default function Pagination() {
   const [users, setUsers] = useState([]);
@@ -167,26 +167,7 @@ export default function Pagination() {
 
   return (
     <>
-      <Snackbar
-        variant="soft"
-        color="success"
-        open={toast.status}
-        onClose={() => setToast({ ...toast, status: false })}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        autoHideDuration={2000} // Auto-hide after 3000ms (3 seconds)
-        endDecorator={
-          <Button
-            onClick={() => setToast({ ...toast, status: false })}
-            size="sm"
-            variant="soft"
-            color="success"
-          >
-            Dismiss
-          </Button>
-        }
-      >
-        {toast.message}
-      </Snackbar>
+      <Toaster toast={toast} setToast={setToast} />
       <h1 className="text-center mt-3 mb-3">Employee data</h1>
 
       {loading ? (

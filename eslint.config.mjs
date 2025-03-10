@@ -1,10 +1,9 @@
 module.exports = {
-  extends: ["next/core-web-vitals"], // Use Next.js recommended rules
+  extends: ["next/core-web-vitals"],
+  parser: "@babel/eslint-parser", // Ensures proper parsing
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: "module",
-  },
-  rules: {
-    // Add any custom ESLint rules here
+    requireConfigFile: false, // Needed for @babel/eslint-parser
   },
 };
