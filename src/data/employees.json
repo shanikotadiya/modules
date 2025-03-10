@@ -1,0 +1,23 @@
+[
+    { "id": 1, "name": "John Doe", "role": "Developer", "department": "Engineering", "salary": 60000 },
+    { "id": 2, "name": "Jane Smith", "role": "Designer", "department": "Marketing", "salary": 55000 },
+    { "id": 3, "name": "Sam Brown", "role": "Manager", "department": "Sales", "salary": 75000 },
+    { "id": 4, "name": "Chris Johnson", "role": "Developer", "department": "Engineering", "salary": 65000 },
+    { "id": 5, "name": "Emily White", "role": "HR", "department": "HR", "salary": 45000 },
+    { "id": 6, "name": "Alex Davis", "role": "Designer", "department": "Marketing", "salary": 50000 },
+    { "id": 7, "name": "Michael Clark", "role": "Sales Rep", "department": "Sales", "salary": 40000 },
+    { "id": 8, "name": "Sarah Adams", "role": "Manager", "department": "Sales", "salary": 70000 },
+    { "id": 9, "name": "David Lee", "role": "Developer", "department": "Engineering", "salary": 68000 },
+    { "id": 10, "name": "Anna Wilson", "role": "Designer", "department": "Marketing", "salary": 53000 },
+    { "id": 11, "name": "Chris Taylor", "role": "Developer", "department": "Engineering", "salary": 67000 },
+    { "id": 12, "name": "Lauren Scott", "role": "HR", "department": "HR", "salary": 48000 },
+    { "id": 13, "name": "James Harris", "role": "Manager", "department": "Sales", "salary": 76000 },
+    { "id": 14, "name": "Nina Perez", "role": "Sales Rep", "department": "Sales", "salary": 42000 },
+    { "id": 15, "name": "Lucas Mitchell", "role": "Developer", "department": "Engineering", "salary": 72000 },
+    { "id": 16, "name": "Olivia Garcia", "role": "HR", "department": "HR", "salary": 46000 },
+    { "id": 17, "name": "Daniel Martinez", "role": "Designer", "department": "Marketing", "salary": 54000 },
+    { "id": 18, "name": "Sophia Rodriguez", "role": "Developer", "department": "Engineering", "salary": 71000 },
+    { "id": 19, "name": "Mason King", "role": "Manager", "department": "Sales", "salary": 78000 },
+    { "id": 20, "name": "Isabella Turner", "role": "HR", "department": "HR", "salary": 49000 }
+  ]
+  
