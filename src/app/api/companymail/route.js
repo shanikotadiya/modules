@@ -58,7 +58,7 @@ export async function POST(req) {
       
           <p>Best regards,</p>
           <p><strong>Shani Kotadiya</strong><br>
-           shanikotadiya@gmail.com |  9409176918 | <a href="https://www.linkedin.com/in/shani-kotadiya" target="_blank">LinkedIn</a></p>
+           shanikotadiya@gmail.com |  9409176918 </p>
         `,
       attachments: [
         {
@@ -73,8 +73,13 @@ export async function POST(req) {
       ],
     };
 
-    await transporter.sendMail(mailOptions);
-    return NextResponse.json({ message: "Email sent successfully!" });
+    const result = await transporter.sendMail(mailOptions);
+    console.log(result);
+
+    return NextResponse.json({
+      success: true,
+      message: "Email sent successfully!",
+    });
   } catch (error) {
     console.error("Error sending email:", error);
     return NextResponse.json({ error: error.message });
