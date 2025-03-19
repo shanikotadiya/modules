@@ -4,8 +4,9 @@ import path from "path";
 import companysmail from "@/app/models/companysmail";
 import { emailRecords } from "@/app/services/companymailservice";
 import connectDb from "@/app/lib/db";
+await connectDb();
+
 export async function POST(req) {
-  await connectDb();
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" });
   }  
@@ -87,9 +88,9 @@ export async function POST(req) {
       },{status:409});
     }
 
+    await transporter.sendMail(mailOptions);
     await companysmail.create({ email: to });
 
-    // await transporter.sendMail(mailOptions);
 
     return NextResponse.json({
       success: true,
@@ -102,7 +103,6 @@ export async function POST(req) {
 }
 
 export async function GET(req) {
-  await connectDb();
   const {
     query = "",
     page = 1,
