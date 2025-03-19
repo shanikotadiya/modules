@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import path from "path";
+import companysmail from "@/app/models/companysmail";
+import { emailRecords } from "@/app/services/companymailservice";
+import connectDb from "@/app/lib/db";
 export async function POST(req) {
+  await connectDb();
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" });
-  }
-
+  }  
   const { to } = await req.json(); // Get form data
 
   if (!to) {
@@ -67,14 +70,26 @@ export async function POST(req) {
             process.cwd(),
             "public",
             "shanikotadiya_mernstack_hr_1yoe.pdf"
-          ), // Path to your resume in the public folder
+          ), 
           contentType: "application/pdf",
         },
       ],
     };
 
-    const result = await transporter.sendMail(mailOptions);
-    console.log(result);
+    const exestingemail = await companysmail.findOne({ email: to });
+    if (
+      exestingemail &&
+      new Date(exestingemail.date) >= new Date(Date.now() - 4 * 86400000)
+    ) {
+      return NextResponse.json({
+        success:false,
+        message: "Email was sent within the last 4 days.",
+      },{status:409});
+    }
+
+    await companysmail.create({ email: to });
+
+    // await transporter.sendMail(mailOptions);
 
     return NextResponse.json({
       success: true,
@@ -84,4 +99,20 @@ export async function POST(req) {
     console.error("Error sending email:", error);
     return NextResponse.json({ error: error.message });
   }
+}
+
+export async function GET(req) {
+  await connectDb();
+  const {
+    query = "",
+    page = 1,
+    limit = 10,
+  } = Object.fromEntries(new URL(req.url).searchParams);
+  const result = await emailRecords(query, page, limit);
+  return NextResponse.json({ data: result });
+}
+
+export async function DELETE(req) {
+  const { query } = Object.fromEntries(new URL(req.url).searchParams);
+
 }

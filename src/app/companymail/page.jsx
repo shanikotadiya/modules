@@ -49,12 +49,17 @@ export default function Pagination() {
   }, [deleteuserid]);
 
   // update Data Request
-  const upDateData = async () => {
+  const reSendMail = async ({ email }) => {
+    const to = email;
     try {
-      const response = await axios.put("api/data", editUserData);
+      const response = await axios.post("api/companymail", { to });
       setToast({ ...toast, status: true, message: response.data.message });
     } catch (error) {
-      console.log(error.response.data.message);
+      setToast({
+        ...toast,
+        status: true,
+        message: error.response.data.message,
+      });
     }
   };
 
@@ -63,11 +68,13 @@ export default function Pagination() {
     (async () => {
       try {
         const res = await axios.get(
-          `/api/data?query=${searchUser}&page=${page}&limit=${limit}`
+          `/api/companymail?query=${searchUser}&page=${page}&limit=${limit}`
         );
-        setUsers(res.data.data.users);
-        setTotalPage(res.data.data.totalPages);
-        setTotalUser(res.data.data.totalcount);
+        console.log(res);
+
+        setUsers(res.data.data.emails);
+        setTotalPage(res.data.data.totalpages);
+        setTotalUser(res.data.data.totalemail);
       } catch (error) {
         console.log(error);
       }
@@ -79,7 +86,7 @@ export default function Pagination() {
     {
       name: "Id",
       selector: (_, index) => index + 1,
-      width: "10%",
+      width: "10vh",
     },
     {
       name: "Email",
@@ -87,50 +94,71 @@ export default function Pagination() {
       sortable: true,
     },
     {
-      name: "Status",
-      cell: (row) => <label>status</label>,
-      width: "10%",
-      ignoreRowClick: true, // Prevent row click events from affecting the button
+      name: "date",
+      selector: (row) => new Date(row.date).toLocaleDateString("en-GB"),
+      sortable: true,
+      width: "20vh",
+    },
+    {
+      name: "Difference In day",
+      selector: (row) => row.dateDifference,
+      sortable: true,
+      width: "20vh",
+    },
+    {
+      name: "Resend",
+      selector: (row) => (
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => reSendMail(row)}
+        >
+          Send
+        </button>
+      ),
+      sortable: true,
+      width: "15vh",
     },
   ];
-
   const customStyles = {
-    rows: {
+    table: {
       style: {
-        textAlign: "center", // Center align text in rows
-        borderBottom: "1px solid #ddd",
-        fontSize: "13px", // Set row font size
-        fontFamily: "'Verdana',Sans-serif", // Change font family
-        fontWeight: "400", // Normal text weight
+        minHeight: "36vh", // Set minimum height
+        border: "1px solid #ddd", // Apply border to entire table
+        borderCollapse: "collapse", // Ensure borders collapse properly
+        width: "100%",
+        overflowX: "auto", // Allows horizontal scrolling on small screens
       },
     },
     headCells: {
       style: {
-        justifyContent: "center",
-        display: "flex",
-        fontWeight: "bold",
-        borderLeft: "1px solid #ddd",
-        borderRight: "1px solid #ddd",
-        borderTop: "1px solid #ddd",
+        border: "1px solid #ddd", // Apply border to header cells
         backgroundColor: "#f1f1f1",
+        fontWeight: "bold",
+        textAlign: "center",
+        display: "flex", // Makes content align properly
+        justifyContent: "center", // Centers text and buttons horizontally
+        alignItems: "center", // Centers text and buttons vertically
+        fontSize: "14px", // Adjusts font size for better visibility
+
+      },
+    },
+    rows: {
+      style: {
+        border: "1px solid #ddd", // Apply border to each row
+        fontSize: "13px",
+        fontFamily: "'Verdana', Sans-serif",
+        fontWeight: "400",
+        textAlign: "center",
       },
     },
     cells: {
       style: {
-        justifyContent: "center",
-        display: "flex",
-        borderLeft: "1px solid #ddd", // Border for left side of cells
-        borderRight: "1px solid #ddd",
-      },
-    },
-    table: {
-      style: {
-        position: "relative", // Needed for absolute positioning
-        minHeight: "300px", // Set a minimum height
-        display: "flex",
-        flexDirection: "columns",
-        justifyContent: "center",
-        // maxHeight: "1000px", // Set a maximum height (optional)
+        border: "1px solid #ddd", // Apply border to each cell
+        textAlign: "center",
+        display: "flex", // Makes content align properly
+        justifyContent: "center", // Centers text and buttons horizontally
+        alignItems: "center", // Centers text and buttons vertically
       },
     },
   };
@@ -157,7 +185,7 @@ export default function Pagination() {
       >
         {toast.message}
       </Snackbar>
-      <h1 className="text-center mt-3 mb-3">Employee data</h1>
+      <h1 className="text-center mt-3 mb-3">Company Mail</h1>
 
       {loading ? (
         <div
@@ -174,28 +202,38 @@ export default function Pagination() {
         </div>
       ) : (
         <div style={{ width: "90%", margin: "0 auto" }}>
-          <div className="d-flex flex-row w-50 mb-3">
-            <label
-              htmlFor=""
-              className="w-25 me-2 p-0 text-center align-content-center rounded"
-              style={{ backgroundColor: "#f1f1f1" }}
-            >
-              Search
-            </label>
-            <input
-              type="text"
-              name=""
-              id=""
-              value={searchUser}
-              onChange={(e) => setSearchUser(e.target.value)}
-              className="form-control w-50"
-            />
+          <div className="row mb-3">
+            {/* Search Wrapper with Flexbox for Alignment */}
+            <div className="col-12 col-sm-8 d-flex align-items-center gap-2">
+              {/* Label Column */}
+              <label
+                className="px-3 py-2 rounded"
+                style={{
+                  backgroundColor: "#f1f1f1",
+                  display: "inline-block",
+                  minWidth: "80px",
+                }}
+              >
+                Search
+              </label>
+              <div className="col col-sm-4 col-md-8 col-lg-3">
+                {/* Search Input */}
+                <input
+                  type="text"
+                  value={searchUser}
+                  onChange={(e) => setSearchUser(e.target.value)}
+                  className="form-control"
+                  placeholder="Search..."
+                />
+              </div>
+            </div>
           </div>
+
           <DataTable
             columns={columns}
             data={users}
             fixedHeader
-            fixedHeaderScrollHeight="300px"
+            fixedHeaderScrollHeight="35vh" // Adjusts height dynamically
             pagination
             paginationServer
             paginationPerPage={5}
@@ -208,7 +246,7 @@ export default function Pagination() {
             onChangeRowsPerPage={(newPerPage) => setLimit(newPerPage)}
             highlightOnHover
             responsive
-            style={{ width: "50%" }}
+            style={{ width: "100%", minWidth: "600px" }} // Ensures good scaling
             customStyles={customStyles}
           />
           <div style={{ textAlign: "center", marginTop: "10px" }}>
@@ -218,7 +256,7 @@ export default function Pagination() {
           </div>
         </div>
       )}
-      <div
+      {/* <div
         className="modal fade"
         id="staticBackdrop"
         data-bs-backdrop="static"
@@ -294,7 +332,7 @@ export default function Pagination() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -27,6 +27,11 @@ export default function Login() {
       const res = await axios.post("/api/companymail", formData);
       setToast({ ...toast, status: true, message: res.data.message });
     } catch (error) {
+      setToast({
+        ...toast,
+        status: true,
+        message: error.response?.data?.message || "Something went wrong!",
+      });
       console.log(error);
     }
     setLoading(false);
