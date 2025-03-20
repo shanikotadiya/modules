@@ -5,10 +5,13 @@ export const emailRecords = async (query, page, limit) => {
     .find({ email: regexQuery })
     .skip((page - 1) * limit)
     .limit(limit);
-  const emails = data.map((email) => ({
-    ...email._doc, // Spread existing email data
-    dateDifference: Math.floor((Date.now() - new Date(email.date)) / 86400000),
-  }));
+    const emails = data.map((email) => ({
+      ...email._doc,
+      dateDifference: Math.floor(
+        (new Date().setHours(0, 0, 0, 0) - new Date(email.date).setHours(0, 0, 0, 0)) / 86400000
+      ),
+    }));    
+  
   const totalemail = await companysmail.countDocuments({ email: regexQuery });
   const totalpages = Math.ceil(totalemail / limit);
   return { emails, totalemail, totalpages };
