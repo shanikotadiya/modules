@@ -9,7 +9,7 @@ await connectDb();
 export async function POST(req) {
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" });
-  }  
+  }
   const { to } = await req.json(); // Get form data
 
   if (!to) {
@@ -71,27 +71,38 @@ export async function POST(req) {
             process.cwd(),
             "public",
             "shanikotadiya_mernstack_hr_1yoe.pdf"
-          ), 
+          ),
           contentType: "application/pdf",
         },
       ],
     };
 
     const exestingemail = await companysmail.findOne({ email: to });
+    if (!exestingemail) {
+      await transporter.sendMail(mailOptions);
+
+      return NextResponse.json({
+        success: true,
+        message: "Email sent successfully!",
+      });
+    }
     if (
       exestingemail &&
       new Date(exestingemail.date) >= new Date(Date.now() - 4 * 86400000)
     ) {
-      return NextResponse.json({
-        success:false,
-        message: "Email was sent within the last 4 days.",
-      },{status:409});
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Email was sent within the last 4 days.",
+        },
+        { status: 409 }
+      );
     }
-
     await transporter.sendMail(mailOptions);
-    await companysmail.create({ email: to });
-
-
+    await companysmail.updateOne(
+      { email: to },
+      { $set: { date: Date.now() } } // ✅ Use $set to update the field
+    );
     return NextResponse.json({
       success: true,
       message: "Email sent successfully!",
@@ -114,5 +125,4 @@ export async function GET(req) {
 
 export async function DELETE(req) {
   const { query } = Object.fromEntries(new URL(req.url).searchParams);
-
 }

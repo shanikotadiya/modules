@@ -68,7 +68,7 @@ export default function Pagination() {
     return res.data.data;
   };
   const { data, isLoading, error } = useQuery({
-    queryKey: ["emails", searchUser, page, limit],
+    queryKey: ["emails", searchUser, page, limit, debouncedSearch],
     queryFn: fetchEmails,
     keepPreviousData: true,
   });
