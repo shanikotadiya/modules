@@ -1,5 +1,5 @@
 "use client";
-
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
@@ -14,7 +14,6 @@ export default function Pagination() {
   const [limit, setLimit] = useState(5);
   const [totalPage, setTotalPage] = useState(1);
   const [totaluser, setTotalUser] = useState(0);
-  const [loading, setloading] = useState(true);
   const [searchUser, setSearchUser] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(searchUser);
   const [editUserData, setEditUserData] = useState({
@@ -62,25 +61,25 @@ export default function Pagination() {
       });
     }
   };
-
+  const fetchEmails = async () => {
+    const res = await axios.get(
+      `/api/companymail?query=${searchUser}&page=${page}&limit=${limit}`
+    );
+    return res.data.data;
+  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["emails", searchUser, page, limit],
+    queryFn: fetchEmails,
+    keepPreviousData: true,
+  });
   // Fetch Data Request
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get(
-          `/api/companymail?query=${searchUser}&page=${page}&limit=${limit}`
-        );
-        console.log(res);
-
-        setUsers(res.data.data.emails);
-        setTotalPage(res.data.data.totalpages);
-        setTotalUser(res.data.data.totalemail);
-      } catch (error) {
-        console.log(error);
-      }
-      setloading(false);
-    })();
-  }, [page, limit, debouncedSearch, deleteuserid]);
+    if (data) {
+      setUsers(data.emails);
+      setTotalPage(data.totalpages);
+      setTotalUser(data.totalemail);
+    }
+  }, [data]);
 
   const columns = [
     {
@@ -140,7 +139,6 @@ export default function Pagination() {
         justifyContent: "center", // Centers text and buttons horizontally
         alignItems: "center", // Centers text and buttons vertically
         fontSize: "14px", // Adjusts font size for better visibility
-
       },
     },
     rows: {
@@ -187,7 +185,7 @@ export default function Pagination() {
       </Snackbar>
       <h1 className="text-center mt-3 mb-3">Company Mail</h1>
 
-      {loading ? (
+      {isLoading ? (
         <div
           className="contaier d-flex justify-content-center align-items-center"
           style={{ height: "50vh" }}
