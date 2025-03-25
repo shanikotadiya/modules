@@ -70,7 +70,9 @@ export default function Pagination() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["emails", searchUser, page, limit, debouncedSearch],
     queryFn: fetchEmails,
-    keepPreviousData: true,
+    keepPreviousData:false,
+    staleTime:0,
+    refetchOnWindowFocus:true
   });
   // Fetch Data Request
   useEffect(() => {
