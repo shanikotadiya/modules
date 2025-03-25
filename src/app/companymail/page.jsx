@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
@@ -16,12 +16,9 @@ export default function Pagination() {
   const [totaluser, setTotalUser] = useState(0);
   const [searchUser, setSearchUser] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(searchUser);
-  const [editUserData, setEditUserData] = useState({
-    username: "",
-    email: "",
-  });
   const [deleteuserid, setDeleteUserId] = useState(null);
   const [toast, setToast] = useState({ status: false, message: "" });
+  const queryClient = useQueryClient()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -52,6 +49,7 @@ export default function Pagination() {
     const to = email;
     try {
       const response = await axios.post("api/companymail", { to });
+      queryClient.invalidateQueries(['emails'])
       setToast({ ...toast, status: true, message: response.data.message });
     } catch (error) {
       setToast({
