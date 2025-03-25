@@ -94,7 +94,7 @@ export async function POST(req) {
 
     const exestingemail = await companysmail.findOne({ email: to });
     if (!exestingemail) {
-      // await transporter.sendMail(mailOptions);
+      await transporter.sendMail(mailOptions);
       await companysmail.create({ email: to });
       return NextResponse.json({
         success: true,
@@ -113,7 +113,7 @@ export async function POST(req) {
         { status: 409 }
       );
     }
-    // await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     await companysmail.updateOne(
       { email: to },
       { $set: { date: Date.now() } } // ✅ Use $set to update the field
