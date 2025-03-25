@@ -95,7 +95,7 @@ export async function POST(req) {
     const exestingemail = await companysmail.findOne({ email: to });
     if (!exestingemail) {
       await transporter.sendMail(mailOptions);
-
+      await companysmail.create({ email: to });
       return NextResponse.json({
         success: true,
         message: "Email sent successfully!",
