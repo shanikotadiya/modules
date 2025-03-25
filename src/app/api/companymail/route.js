@@ -34,35 +34,50 @@ export async function POST(req) {
       subject:
         "Experienced MERN & Next.js Developer | 1.5+ Years in Scalable Web Solutions",
       html: `
-          <p>Dear Hiring Manager,</p>
-      
-          <p>I hope you're doing well. I am writing to express my interest in the <strong>MERN Stack Developer</strong> position. With <strong>1.5 years of experience</strong> at <strong>Tech Transformer</strong>, I have worked extensively on <strong>MERN stack development</strong>, including <strong>Next.js</strong> for building dynamic and scalable applications.</p>
-      
-          <h3>Key Skills & Experience:</h3>
-          <ul>
-            <li><strong>MERN Stack</strong> (MongoDB, Express.js, React.js, Node.js)</li>
-            <li><strong>Next.js</strong> for SSR & Dynamic Web Applications</li>
-            <li><strong>JWT Authentication & API Development</strong></li>
-            <li><strong>Database Management & Optimization</strong></li>
-            <li><strong>Frontend & Backend Development</strong></li>
-          </ul>
-      
-          <h3>Notable Projects:</h3>
-          <ul>
-            <li><strong>User Management System</strong> – Implemented <strong>JWT authentication & validation</strong> for secure access control.</li>
-            <li><strong>Journey Junction</strong> – Developed a travel guide platform estimating cost, time, and distance.</li>
-            <li><strong>IAM4JobPortal</strong> – Built a job portal application to streamline recruitment.</li>
-            <li><strong>Veg Company (Next.js)</strong> – Designed an e-commerce platform for fresh produce.</li>
-            <li><strong>Veg Admin (Next.js)</strong> – Created a dynamic admin dashboard for managing website content efficiently.</li>
-          </ul>
-      
-          <p>I am excited about the opportunity to contribute my skills to your team and help build scalable web solutions. Please let me know a convenient time to discuss how I can add value to your organization.</p>
-      
-          <p>Looking forward to your response.</p>
-      
-          <p>Best regards,</p>
-          <p><strong>Shani Kotadiya</strong><br>
-           shanikotadiya@gmail.com |  9409176918 </p>
+       <p>Dear Hiring Manager,</p>
+
+<p>
+  I hope you're doing well. I am writing to express my interest in the MERN Stack Developer position. 
+  With 1.5 years of experience at Tech Transformer, I have worked extensively on MERN stack development, 
+  including Next.js for building dynamic and scalable applications.
+</p>
+
+<p>
+  My expertise includes MERN Stack (MongoDB, Express.js, React.js, Node.js), 
+  Next.js for server-side rendering and dynamic web applications, JWT authentication and API development, 
+  database management and optimization, and full-stack development.
+</p>
+
+<p>
+  Throughout my career, I have worked on several impactful projects. I developed a User Management System, 
+  implementing JWT authentication and validation to enhance security. I also built Journey Junction, 
+  a travel guide platform that estimates cost, time, and distance for different travel modes.
+</p>
+
+<p>
+  Another key project I contributed to is IAM4JobPortal, a job portal designed to streamline the recruitment 
+  process. Additionally, I worked on Veg Company (Next.js), an e-commerce platform for fresh produce, 
+  and Veg Admin (Next.js), a dynamic admin dashboard that allows seamless website content management.
+</p>
+
+<p>
+  Most recently, I developed MediNest, a healthcare management system that simplifies patient record handling, 
+  doctor appointments, and medical services, improving efficiency in the healthcare domain.
+</p>
+
+<p>
+  I am excited about the opportunity to contribute my skills to your team and help build scalable web solutions. 
+  Please let me know a convenient time to discuss how I can add value to your organization.
+</p>
+
+<p>Looking forward to your response.</p>
+
+<p>Best regards,</p>
+
+<p>
+  Shani Kotadiya<br />
+  shanikotadiya@gmail.com | 9409176918
+</p>
         `,
       attachments: [
         {
@@ -70,7 +85,7 @@ export async function POST(req) {
           path: path.join(
             process.cwd(),
             "public",
-            "shanikotadiya_mernstack_hr_1yoe.pdf"
+            "Shani_Kotadiya_MERN_Stack_Developer_1Y_Experience.pdf"
           ),
           contentType: "application/pdf",
         },
