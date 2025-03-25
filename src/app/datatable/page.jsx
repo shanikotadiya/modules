@@ -14,6 +14,7 @@ export default function Pagination() {
   const [limit, setLimit] = useState(5);
   const [totalPage, setTotalPage] = useState(1);
   const [totaluser, setTotalUser] = useState(0);
+  console.log(totaluser);
   const [loading, setloading] = useState(true);
   const [searchUser, setSearchUser] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(searchUser);
@@ -213,6 +214,7 @@ export default function Pagination() {
             paginationRowsPerPageOptions={[5, 10, 15]}
             paginationComponentOptions={{
               noRowsPerPage: false,
+          
             }}
             paginationTotalRows={totaluser}
             onChangePage={(page) => setPage(page)}

@@ -13,12 +13,12 @@ export default function Pagination() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
   const [totalPage, setTotalPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true)
   const [totaluser, setTotalUser] = useState(0);
   const [searchUser, setSearchUser] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(searchUser);
-  const [deleteuserid, setDeleteUserId] = useState(null);
   const [toast, setToast] = useState({ status: false, message: "" });
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -27,29 +27,13 @@ export default function Pagination() {
     return () => clearTimeout(timeout); // Cleanup previous timeout on new change
   }, [searchUser]);
 
-  // Delete Data Request
-  useEffect(() => {
-    (async () => {
-      if (deleteuserid) {
-        try {
-          const res = await axios.delete(`api/data?query=${deleteuserid}`);
-          if (res.status == 200) {
-            setDeleteUserId(null);
-            setToast({ ...toast, status: true, message: res.data.message });
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    })();
-  }, [deleteuserid]);
 
   // update Data Request
   const reSendMail = async ({ email }) => {
     const to = email;
     try {
       const response = await axios.post("api/companymail", { to });
-      queryClient.invalidateQueries(['emails'])
+      queryClient.invalidateQueries(["emails"]);
       setToast({ ...toast, status: true, message: response.data.message });
     } catch (error) {
       setToast({
@@ -59,27 +43,19 @@ export default function Pagination() {
       });
     }
   };
-  const fetchEmails = async () => {
-    const res = await axios.get(
-      `/api/companymail?query=${searchUser}&page=${page}&limit=${limit}`
-    );
-    return res.data.data;
-  };
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["emails", searchUser, page, limit, debouncedSearch],
-    queryFn: fetchEmails,
-    keepPreviousData:false,
-    staleTime:0,
-    refetchOnWindowFocus:true
-  });
-  // Fetch Data Request
-  useEffect(() => {
-    if (data) {
-      setUsers(data.emails);
-      setTotalPage(data.totalpages);
-      setTotalUser(data.totalemail);
-    }
-  }, [data]);
+  useEffect(()=>{
+      setIsLoading(true)
+       const fetchdata = async () => {
+        const response = await axios.get(
+          `/api/companymail?query=${searchUser}&page=${page}&limit=${limit}`
+        );        
+        setUsers(response.data.data.emails || []); // Ensure emails array is set
+        setTotalPage(response.data.data?.totalpages || 1); // Default to 1 to avoid issues
+        setTotalUser(response.data.data?.totalemail || 0);
+      }
+      setIsLoading(false)
+      fetchdata();
+  },[searchUser, page, limit, debouncedSearch])
 
   const columns = [
     {
@@ -238,6 +214,8 @@ export default function Pagination() {
             paginationRowsPerPageOptions={[5, 10, 15]}
             paginationComponentOptions={{
               noRowsPerPage: false,
+              disableNext: page >= totalPage, // Disable Next if on last page
+              disablePrev: page === 1, // Disable Prev if on first page
             }}
             paginationTotalRows={totaluser}
             onChangePage={(page) => setPage(page)}
