@@ -11,6 +11,7 @@ export const emailRecords = async (query, page, limit) => {
         (new Date().setHours(0, 0, 0, 0) - new Date(email.date).setHours(0, 0, 0, 0)) / 86400000
       ),
     }));    
+  console.log(emails);
   
   const totalemail = await companysmail.countDocuments({ email: regexQuery });
   const totalpages = Math.ceil(totalemail / limit);

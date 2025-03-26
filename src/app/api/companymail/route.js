@@ -21,7 +21,7 @@ export async function POST(req) {
       service: "gmail",
       auth: {
         user: "shanikotadiya@gmail.com", // Your email
-        pass: "hiwv jglj wbtv uhxe", // App Password (if 2FA enabled)
+        pass: "zoge zfjw fhww zfqa", // App Password (if 2FA enabled)
       },
       tls: {
         rejectUnauthorized: false, // Ignore self-signed certificate errors
@@ -134,7 +134,10 @@ export async function GET(req) {
     page = 1,
     limit = 10,
   } = Object.fromEntries(new URL(req.url).searchParams);
+  
   const result = await emailRecords(query, page, limit);
+  console.log(result);
+  
   return NextResponse.json({ data: result });
 }
 
