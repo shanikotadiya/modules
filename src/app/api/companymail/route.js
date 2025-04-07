@@ -20,8 +20,8 @@ export async function POST(req) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "shanikotadiya@gmail.com", // Your email
-        pass: "zoge zfjw fhww zfqa", // App Password (if 2FA enabled)
+        user: "janakdobariya31@gmail.com", // Your email
+        pass: "dfsm abjs urod lwdy", // App Password (if 2FA enabled)
       },
       tls: {
         rejectUnauthorized: false, // Ignore self-signed certificate errors
@@ -29,63 +29,45 @@ export async function POST(req) {
     });
 
     const mailOptions = {
-      from: "shanikotadiya@gmail.com",
+      from: "janakdobariya31@gmail.com",
       to,
       subject:
-        "Experienced MERN & Next.js Developer | 1.5+ Years in Scalable Web Solutions",
+        "Python Developer | Web Automation & Scripting",
       html: `
-       <p>Dear Hiring Manager,</p>
+   <p>Dear Hiring Manager,</p>
 
 <p>
-  I hope you're doing well. I am writing to express my interest in the MERN Stack Developer position. 
-  With 1.5 years of experience at Tech Transformer, I have worked extensively on MERN stack development, 
-  including Next.js for building dynamic and scalable applications.
+  I hope you're doing well.
 </p>
 
 <p>
-  My expertise includes MERN Stack (MongoDB, Express.js, React.js, Node.js), 
-  Next.js for server-side rendering and dynamic web applications, JWT authentication and API development, 
-  database management and optimization, and full-stack development.
+  My name is Janak Dobariya, a Python developer currently pursuing a B.E. in Computer Engineering (AI & ML).
+  During my recent internship at Oceanmtech, I worked on real-world projects involving web scraping,
+  data automation, and Python scripting.
 </p>
 
 <p>
-  Throughout my career, I have worked on several impactful projects. I developed a User Management System, 
-  implementing JWT authentication and validation to enhance security. I also built Journey Junction, 
-  a travel guide platform that estimates cost, time, and distance for different travel modes.
+  I've attached my resume for your review and would appreciate the chance to discuss any opportunities
+  where my skills may be a good fit.
 </p>
 
-<p>
-  Another key project I contributed to is IAM4JobPortal, a job portal designed to streamline the recruitment 
-  process. Additionally, I worked on Veg Company (Next.js), an e-commerce platform for fresh produce, 
-  and Veg Admin (Next.js), a dynamic admin dashboard that allows seamless website content management.
-</p>
-
-<p>
-  Most recently, I developed MediNest, a healthcare management system that simplifies patient record handling, 
-  doctor appointments, and medical services, improving efficiency in the healthcare domain.
-</p>
-
-<p>
-  I am excited about the opportunity to contribute my skills to your team and help build scalable web solutions. 
-  Please let me know a convenient time to discuss how I can add value to your organization.
-</p>
-
-<p>Looking forward to your response.</p>
+<p>Thank you for your time and consideration.</p>
 
 <p>Best regards,</p>
 
 <p>
-  Shani Kotadiya<br />
-  shanikotadiya@gmail.com | 9409176918
+  Janak Dobariya<br />
+  janakdobariya31@gmail.com | +91 9106907071
 </p>
+
         `,
       attachments: [
         {
-          filename: "shanikotadiya_mernstack_hr_1yoe.pdf", // Set the filename
+          filename: "JANAK Dobariya's Resume.pdf", // Set the filename
           path: path.join(
             process.cwd(),
             "public",
-            "Shani_Kotadiya_MERN_Stack_Developer_1Y_Experience.pdf"
+            "JANAK Dobariya's Resume.pdf"
           ),
           contentType: "application/pdf",
         },
@@ -134,10 +116,10 @@ export async function GET(req) {
     page = 1,
     limit = 10,
   } = Object.fromEntries(new URL(req.url).searchParams);
-  
+
   const result = await emailRecords(query, page, limit);
   console.log(result);
-  
+
   return NextResponse.json({ data: result });
 }
 

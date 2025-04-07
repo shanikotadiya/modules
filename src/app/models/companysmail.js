@@ -6,4 +6,4 @@ const companyEmailSchema = new mongoose.Schema({
 });
 
 export default mongoose.models.appliedcompanyemails ||
-  mongoose.model("appliedcompanyemails", companyEmailSchema);
+  mongoose.model("janakappliedcompanyemails", companyEmailSchema);
