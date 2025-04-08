@@ -31,8 +31,8 @@ export async function POST(req) {
     const mailOptions = {
       from: "janakdobariya31@gmail.com",
       to,
-      Subject: 
-        "Python Developer | Seeking Internship Opportunity",
+      subject: 
+        `Python Developer | Seeking Internship Opportunity`,
       html: `
       <p>Dear Hiring Manager,</p>
       
