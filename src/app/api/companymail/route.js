@@ -31,35 +31,38 @@ export async function POST(req) {
     const mailOptions = {
       from: "janakdobariya31@gmail.com",
       to,
-      subject:
-        "Python Developer | Web Automation & Scripting",
+      Subject: 
+        "Python Developer | Seeking Internship Opportunity",
       html: `
-   <p>Dear Hiring Manager,</p>
-
-<p>
-  I hope you're doing well.
-</p>
-
-<p>
-  My name is Janak Dobariya, a Python developer currently pursuing a B.E. in Computer Engineering (AI & ML).
-  During my recent internship at Oceanmtech, I worked on real-world projects involving web scraping,
-  data automation, and Python scripting.
-</p>
-
-<p>
-  I've attached my resume for your review and would appreciate the chance to discuss any opportunities
-  where my skills may be a good fit.
-</p>
-
-<p>Thank you for your time and consideration.</p>
-
-<p>Best regards,</p>
-
-<p>
-  Janak Dobariya<br />
-  janakdobariya31@gmail.com | +91 9106907071
-</p>
-
+      <p>Dear Hiring Manager,</p>
+      
+      <p>
+        I hope you're doing well.
+      </p>
+      
+      <p>
+        My name is Janak Dobariya, a Python developer currently pursuing a B.E. in Computer Engineering (AI & ML).
+        I'm actively seeking a Python development internship where I can apply my skills and continue learning in a real-world environment.
+      </p>
+      
+      <p>
+        During my recent internship at Oceanmtech, I worked on projects involving web scraping, data automation,
+        and Python scripting, which gave me practical experience and strengthened my problem-solving abilities.
+      </p>
+      
+      <p>
+        I’ve attached my resume for your review, and I’d appreciate the opportunity to discuss how I might contribute to your team.
+      </p>
+      
+      <p>Thank you for your time and consideration.</p>
+      
+      <p>Best regards,</p>
+      
+      <p>
+        Janak Dobariya<br />
+        janakdobariya31@gmail.com<br />
+        +91 9106907071
+      </p>
         `,
       attachments: [
         {
