@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { CButton, CSpinner } from "@coreui/react";
-import "@coreui/coreui/dist/css/coreui.min.css";
+// import "@coreui/coreui/dist/css/coreui.min.css";
 import axios from "axios";
 import dynamic from 'next/dynamic';
 

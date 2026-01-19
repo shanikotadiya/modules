@@ -4,6 +4,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true, // Skip ESLint checks during build
   },
+   experimental: {
+    turbo: false
+  }
 };
 
 export default nextConfig;

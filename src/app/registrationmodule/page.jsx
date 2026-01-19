@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { CButton, CSpinner } from "@coreui/react";
-import "@coreui/coreui/dist/css/coreui.min.css";
+// import "@coreui/coreui/dist/css/coreui.min.css";
 
 export default function RegistrationModule() {
   const [formData, setFormdata] = useState({
