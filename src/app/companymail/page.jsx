@@ -32,6 +32,7 @@ export default function Pagination() {
   const reSendMail = async ({ email }) => {
     const to = email;
     try {
+      
       const response = await axios.post("api/companymail", { to });
       queryClient.invalidateQueries(["emails"]);
       setToast({ ...toast, status: true, message: response.data.message });
