@@ -16,7 +16,7 @@ const connectDb = async () => {
     return;
   }
   try {
-    await mongoose.connect('mongodb+srv://mycompanyapplied:in0EN5VJRDJXDkVO@mymodules.qssso.mongodb.net/userdata?appName=mymodules');
+    await mongoose.connect(MONGO_URI);
     isConnected = true;
     console.log("MongoDB connected");
   } catch (error) {
