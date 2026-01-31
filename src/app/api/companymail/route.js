@@ -4,9 +4,9 @@ import path from "path";
 import companysmail from "@/app/models/companysmail";
 import { emailRecords } from "@/app/services/companymailservice";
 import connectDb from "@/app/lib/db";
-await connectDb();
 
 export async function POST(req) {
+  await connectDb();
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" });
   }

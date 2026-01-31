@@ -37,7 +37,7 @@ export default function Pagination() {
     (async () => {
       if (deleteuserid) {
         try {
-          const res = await axios.delete(`api/data?query=${deleteuserid}`);
+          const res = await axios.delete(process.env.NEXT_PUBLIC_API_URL + `api/data?query=${deleteuserid}`);
           if (res.status == 200) {
             setDeleteUserId(null);
             setToast({ ...toast, status: true, message: res.data.message });

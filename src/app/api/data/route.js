@@ -6,9 +6,9 @@ import {
   deleteRecord,
 } from "@/app/services/recordservice";
 import { responceFormatter } from "@/app/lib/responceFormatter";
-await connectDb();
 
 export async function GET(req) {
+  await connectDb();
   if (req.method == "GET") {
     const {
       query = "",

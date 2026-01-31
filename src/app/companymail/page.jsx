@@ -33,7 +33,7 @@ export default function Pagination() {
     const to = email;
     try {
       
-      const response = await axios.post("api/companymail", { to });
+      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "api/companymail", { to });
       queryClient.invalidateQueries(["emails"]);
       setToast({ ...toast, status: true, message: response.data.message });
     } catch (error) {
@@ -48,7 +48,7 @@ export default function Pagination() {
       setIsLoading(true)
        const fetchdata = async () => {
         const response = await axios.get(
-          `/api/companymail?query=${searchUser}&page=${page}&limit=${limit}`
+          process.env.NEXT_PUBLIC_API_URL + `/api/companymail?query=${searchUser}&page=${page}&limit=${limit}`
         );        
         setUsers(response.data.data.emails || []); // Ensure emails array is set
         setTotalPage(response.data.data?.totalpages || 1); // Default to 1 to avoid issues

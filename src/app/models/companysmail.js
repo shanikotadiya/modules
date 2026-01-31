@@ -5,5 +5,8 @@ const companyEmailSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
 });
 
-export default mongoose.models.appliedcompanyemails ||
+const appliedCompanyEmails =
+  mongoose.models.appliedcompanyemailssenior || 
   mongoose.model("appliedcompanyemailssenior", companyEmailSchema);
+
+export default appliedCompanyEmails
