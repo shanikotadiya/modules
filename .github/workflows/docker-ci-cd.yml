@@ -31,13 +31,13 @@ jobs:
           docker tag $IMAGE_TAG sunnyypatel/docker-cicd:latest
           docker push sunnyypatel/docker-cicd:latest
 
-
   # ======================
   # 2️⃣ CD JOB – DEPLOY
   # ======================
   deploy:
     name: Deploy to Mac Server
     runs-on: self-hosted
+    needs: build   # ✅ waits until build completes
 
     steps:
       - name: Deploy Docker container
