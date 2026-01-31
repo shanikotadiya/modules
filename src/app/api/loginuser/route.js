@@ -3,7 +3,6 @@ import { loginValidator } from "@/app/lib/validators";
 import { responceFormatter } from "@/app/lib/responceFormatter";
 import User from "@/app/models/registeruser";
 import { comparePassword } from "@/app/lib/authUtils";
-import connectDb from "@/app/lib/db";
 import { genertaeToken } from "@/app/lib/jwtUtils";
 import Login from "@/app/login/page";
 export async function POST(req) {
@@ -21,6 +20,7 @@ export async function POST(req) {
       }
     );
   }
+    const connectDb = (await import("@/app/lib/db")).default;
   await connectDb();
   const user = await User.findOne({ email });
   // console.log(user);

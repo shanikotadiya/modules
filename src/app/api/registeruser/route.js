@@ -1,4 +1,3 @@
-import connectDb from "@/app/lib/db";
 import { responceFormatter } from "@/app/lib/responceFormatter";
 import { NextResponse } from "next/server";
 import User from "@/app/models/registeruser";
@@ -20,6 +19,7 @@ export async function POST(req) {
         { status: 400 }
       );
     }
+      const connectDb = (await import("@/app/lib/db")).default;
     await connectDb();
     const existingUser = await User.findOne({ email });
     if (existingUser) {

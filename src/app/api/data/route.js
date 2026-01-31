@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import connectDb from "@/app/lib/db";
 import {
   getRecords,
   updateRecord,
@@ -8,6 +7,7 @@ import {
 import { responceFormatter } from "@/app/lib/responceFormatter";
 
 export async function GET(req) {
+  const connectDb = (await import("@/app/lib/db")).default;
   await connectDb();
   if (req.method == "GET") {
     const {
