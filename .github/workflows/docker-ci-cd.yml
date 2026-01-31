@@ -21,8 +21,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t sunnyypatel/docker-cicd:latest .
-
-      - name: Push Docker image
-        run: |
-          docker push sunnyypatel/docker-cicd:latest
+          IMAGE_TAG=shanikotadiya/nextjs-app:${{ github.sha }}
+          docker build -t $IMAGE_TAG .
+          docker push $IMAGE_TAG
+          docker tag $IMAGE_TAG shanikotadiya/nextjs-app:latest
+          docker push shanikotadiya/nextjs-app:latest
