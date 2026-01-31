@@ -26,10 +26,8 @@ jobs:
       - name: Build & Push Docker image
         run: |
           IMAGE_TAG=sunnyypatel/docker-cicd:${{ github.sha }}
-
           docker build -t $IMAGE_TAG .
           docker push $IMAGE_TAG
-
           docker tag $IMAGE_TAG sunnyypatel/docker-cicd:latest
           docker push sunnyypatel/docker-cicd:latest
 
@@ -39,18 +37,10 @@ jobs:
   # ======================
   deploy:
     name: Deploy to Mac Server
-    runs-on: ubuntu-latest
-
-    # 🔗 This job runs ONLY if build succeeds
-    needs: build
+    runs-on: self-hosted
 
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.MAC_HOST }}
-          username: ${{ secrets.MAC_USER }}
-          key: ${{ secrets.MAC_SSH_KEY }}
-          script: |
-            cd ~/next-app
-            ./deploy.sh
+      - name: Deploy Docker container
+        run: |
+          cd ~/next-app
+          ./deploy.sh
