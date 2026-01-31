@@ -49,7 +49,7 @@ export default function RegistrationModule() {
 
     setloading(true);
     try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/api/registeruser", formData,{
+      const response = await axios.post("/api/registeruser", formData,{
         headers: {
           'Content-Type': 'application/json', // Content-Type for JSON data
         },

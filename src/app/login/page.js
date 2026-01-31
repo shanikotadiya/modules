@@ -18,7 +18,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/api/loginuser", formData);
+      const res = await axios.post( "/api/loginuser", formData);
       console.log(res);
     } catch (error) {
       console.log(error);

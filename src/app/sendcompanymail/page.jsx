@@ -24,7 +24,7 @@ export default function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/api/companymail", formData);
+      const res = await axios.post("/api/companymail", formData);
       setToast({ ...toast, status: true, message: res.data.message });
     } catch (error) {
       setToast({
