@@ -10,7 +10,7 @@ jobs:
   # 1️⃣ CI JOB – BUILD
   # ======================
   build:
-    name: Build & Push Image
+    name: Build & Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
@@ -37,10 +37,11 @@ jobs:
   deploy:
     name: Deploy to Mac Server
     runs-on: self-hosted
-    needs: build   # ✅ waits until build completes
+    needs: build # deploy will only run after build completes
 
     steps:
       - name: Deploy Docker container
         run: |
+          IMAGE_TAG=sunnyypatel/docker-cicd:${{ github.sha }}
           cd ~/next-app
-          ./deploy.sh
+          ./deploy.sh $IMAGE_TAG
