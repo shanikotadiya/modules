@@ -21,8 +21,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          IMAGE_TAG=shanikotadiya/nextjs-app:${{ github.sha }}
+          IMAGE_TAG=sunnyypatel/docker-cicd:${{ github.sha }}
           docker build -t $IMAGE_TAG .
           docker push $IMAGE_TAG
-          docker tag $IMAGE_TAG shanikotadiya/nextjs-app:latest
-          docker push shanikotadiya/nextjs-app:latest
+          docker tag $IMAGE_TAG sunnyypatel/docker-cicd:latest
+          docker push sunnyypatel/docker-cicd:latest
