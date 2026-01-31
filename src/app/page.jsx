@@ -11,7 +11,7 @@ export default function page() {
         }}
       >
         <h1 style={{ textAlign: "center" }}>
-          This is index page click link to go for that module
+          This is index page click link to go for that modulee
         </h1>
         <table
           border={1}
