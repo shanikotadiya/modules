@@ -35,53 +35,66 @@ export async function POST(req) {
       html: `
     <p>Dear Hiring Manager,</p>
 
-    <p>
-      I hope you are doing well.
-    </p>
+<p>
+  I hope you are doing well.
+</p>
 
-    <p>
-      My name is <strong>Shani Kotadiya</strong>, a MERN Stack Developer with over
-      <strong>3 years of hands-on experience</strong> building scalable,
-      production-ready web applications using React.js, Next.js, Node.js,
-      MongoDB, and MySQL.
-    </p>
+<p>
+  My name is Shani Kotadiya, a MERN Stack Developer with over 3 years of hands-on
+  experience building scalable, production-ready web applications using
+  React.js, Next.js, Node.js, MongoDB, and MySQL.
+</p>
 
-    <p>
-      Currently, I am working as a Full Stack Developer at Tech Erudite, where I
-      actively contribute to CRM systems, automation workflows, and backend
-      services. I have strong experience with GoHighLevel (GHL) CRM integrations,
-      secure payment gateway integrations, webhook handling, and scheduled
-      background jobs using cron.
-    </p>
+<p>
+  Currently, I am working as a Full Stack Developer at Tech Erudite, where I
+  actively contribute to CRM systems, automation workflows, and backend services.
+  My work includes GoHighLevel (GHL) CRM integrations, secure payment gateway
+  integrations, webhook handling, and scheduled background jobs using cron.
+</p>
 
-    <p>
-      I have also worked extensively on Next.js applications with server-side
-      rendering (SSR) to improve application performance and SEO, along with
-      developing GraphQL APIs, managing relational data using SQL and Sequelize,
-      and building real-time features using Socket.io.
-    </p>
+<p>
+  I have hands-on experience building Next.js applications with server-side
+  rendering (SSR) to improve performance and SEO, along with developing GraphQL
+  APIs, managing relational data using SQL and Sequelize, and implementing
+  real-time features using Socket.io.
+</p>
 
-    <p>
-      I take ownership of features end-to-end and focus on clean architecture,
-      maintainable code, and reliable production systems.
-    </p>
+<p>
+  Along with application development, I have practical experience with Docker
+  and CI/CD pipelines. I containerize applications using Docker and have worked
+  on automated deployments using GitHub Actions. I have configured custom
+  self-hosted macOS GitHub runners for CI workflows and managed Docker image
+  builds and pushes via Docker Hub.
+</p>
 
-    <p>
-      I have attached my resume for your review and would welcome the opportunity
-      to discuss how my experience and skills can contribute to your team.
-    </p>
+<p>
+  I have also worked with Cloudflare for domain management and port binding,
+  enabling secure access to applications running on servers without exposing
+  internal ports directly.
+</p>
 
-    <p>Thank you for your time and consideration.</p>
+<p>
+  I take ownership of features end-to-end and focus on clean architecture,
+  maintainable code, and reliable production systems.
+</p>
 
-    <p>
-      Best regards,<br />
-      <strong>Shani Kotadiya</strong><br />
-      shanikotadiyda@gmail.com<br />
-      +91 9409176918<br />
-      <a href="https://www.linkedin.com/in/shani-kotadiya-614422204/" target="_blank">
-        LinkedIn Profile
-      </a>
-    </p>
+<p>
+  I have attached my resume for your review and would welcome the opportunity to
+  discuss how my experience and skills can contribute to your team.
+</p>
+
+<p>
+  Thank you for your time and consideration.
+</p>
+
+<p>
+  Best regards,<br />
+  Shani Kotadiya<br />
+  shanikotadiyda@gmail.com<br />
+  +91 9409176918<br />
+  LinkedIn - https://www.linkedin.com/in/shani-kotadiya-614422204/
+</p>
+
   `,
       attachments: [
         {
