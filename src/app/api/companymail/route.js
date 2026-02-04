@@ -3,9 +3,11 @@ import nodemailer from "nodemailer";
 import path from "path";
 import companysmail from "@/app/models/companysmail";
 import { emailRecords } from "@/app/services/companymailservice";
+import { responceFormatter } from "@/app/lib/responceFormatter";
+import { deleteCompanyMail } from "@/app/services/recordservice";
 
 export async function POST(req) {
-    const connectDb = (await import("@/app/lib/db")).default;
+  const connectDb = (await import("@/app/lib/db")).default;
   await connectDb();
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" });
@@ -27,7 +29,7 @@ export async function POST(req) {
         rejectUnauthorized: false, // Ignore self-signed certificate errors
       },
     });
-    console.log("tooo",to)
+    console.log("tooo", to)
     const mailOptions = {
       from: "shanikotadiya@gmail.com",
       to,
@@ -159,5 +161,27 @@ export async function GET(req) {
 }
 
 export async function DELETE(req) {
-  const { query } = Object.fromEntries(new URL(req.url).searchParams);
+  try {
+    const { query } = Object.fromEntries(new URL(req.url).searchParams);
+    const result = await deleteCompanyMail(query);
+    return NextResponse.json(
+      responceFormatter({
+        status: "success",
+        message: "Delete Record Successfull",
+      }),
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      responceFormatter({
+        status: "error",
+        message: "failed to delete data. Please try again later",
+      }),
+      {
+        status: 500,
+      }
+    );
+  }
 }

@@ -18,6 +18,7 @@ export default function Pagination() {
   const [searchUser, setSearchUser] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(searchUser);
   const [toast, setToast] = useState({ status: false, message: "" });
+  const [isrefresh,setIsRefresh] = useState(false)
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -44,6 +45,18 @@ export default function Pagination() {
       });
     }
   };
+
+  const OnDelete = async (row)=>{
+     try {
+          const res = await axios.delete(`api/companymail?query=${row?._id}`);
+          if (res.status == 200) {
+            setIsRefresh(!isrefresh)
+            setToast({ ...toast, status: true, message: res.data.message });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+  }
   useEffect(()=>{
       setIsLoading(true)
        const fetchdata = async () => {
@@ -56,7 +69,7 @@ export default function Pagination() {
       }
       setIsLoading(false)
       fetchdata();
-  },[searchUser, page, limit, debouncedSearch])
+  },[searchUser, page, limit, debouncedSearch, isrefresh])
 
   const columns = [
     {
@@ -90,6 +103,20 @@ export default function Pagination() {
           onClick={() => reSendMail(row)}
         >
           Send
+        </button>
+      ),
+      sortable: true,
+      width: "15vh",
+    },
+    {
+      name: "Delete",
+      selector: (row) => (
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => OnDelete(row)}
+        >
+          Delete
         </button>
       ),
       sortable: true,

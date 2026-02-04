@@ -1,3 +1,4 @@
+import appliedCompanyEmails from "../models/companysmail";
 import User from "../models/registeruser";
 export const getRecords = async (query, page, limit) => {
   const regexQuery = new RegExp(query, "i");
@@ -23,3 +24,10 @@ export const deleteRecord = async (id) => {
   const result = await User.findByIdAndDelete(id);
   return result;
 };
+
+export const deleteCompanyMail = async(id) =>{
+  console.log("newidssssssssssss", id)
+  const result =  await appliedCompanyEmails.findByIdAndDelete(id);
+  console.log("result=====>>>>>>>",result)
+  return result;
+}
