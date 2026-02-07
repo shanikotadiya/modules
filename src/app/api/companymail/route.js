@@ -33,7 +33,7 @@ export async function POST(req) {
     const mailOptions = {
       from: "shanikotadiya@gmail.com",
       to,
-      subject: "Senior MERN Stack Developer | 3+ Years Production Experience",
+      subject: "MERN Stack Developer | 3+ Years Production Experience",
       html: `
     <p>Dear Hiring Manager,</p>
 
